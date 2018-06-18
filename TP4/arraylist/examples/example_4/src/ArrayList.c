@@ -431,19 +431,17 @@ ArrayList* al_subList(ArrayList* this,int from,int to)
 
     if(this != NULL)
     {
-        if(from >=0 && from < this->size && to >= 0 && to < this->size && from < to)
+        if(from >=0 && from < this->len(this) && to >= 0 && to <= this->len(this) && from < to)
         {
             returnAux = al_newArrayList();
 
             for(i=from; i<to; i++)
             {
-                al_add(returnAux, this->pElements[i]);
+                this->add(returnAux, this->pElements[i]);
 
             }
         }
     }
-
-
     return returnAux ;
 }
 
@@ -457,27 +455,46 @@ int al_containsAll(ArrayList* this,ArrayList* this2)
 {
     int returnAux = -1;
     int i;
-    int cont=0;
+    int cont = 0;
 
     if(this != NULL && this2 != NULL)
     {
-        if(this->size == this2-> size)
+        /*if(this->size == this2->size)
         {
             for(i=0; i < this->size; i++)
             {
-                if(this->pElements[i] != this2->pElements[i])
+             if(this->pElements[i] != this2->pElements[i])
                 {
                     cont++;
                 }
             }
-        }
-        if(cont>0)
-        {
-            returnAux = 0;
+            if(cont>0)
+                {
+                    returnAux = 0;
+                }
+                else
+                {
+                    returnAux = 1;
+                }
         }
         else
+                {
+                    returnAux = 0;
+                }*/
+        returnAux = 0;
+        if(this->len(this) == this2->len(this))
         {
-            returnAux = 1;
+            for(i=0; i < this->len(this); i++)
+            {
+             if(this->pElements[i] == this2->pElements[i])
+                {
+                    cont++;
+                }
+            }
+            if(cont>0)
+                {
+                    returnAux = 1;
+                }
         }
     }
 
