@@ -1,19 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funciones.h"
-#define cantidad 20
-#define valor -1
 
-inicializar(EMovie[]);
-obtenerEspacioLibre(EMovie[]);
-altaPelicula(EMovie[], int);
+
 
 int main()
 {
-    char seguir='s';
-    int opcion=0;
-    int i;
-    EMovie  pelicula[20];
+    char seguir = 's';
+    int opcion = 0;
+    EMovie movie[10];
+    int index;
+
+    inicializar();
+
 
     while(seguir=='s')
     {
@@ -27,16 +26,6 @@ int main()
         switch(opcion)
         {
             case 1:
-                i = obtenerEspacioLibre(pelicula);
-                if (i==-1)
-                {
-                    printf("\nNo hay mas lugar disponible\n");
-                }
-                else
-                {
-                    altaPelicula(pelicula, i);
-                }
-
                 break;
             case 2:
                 break;
