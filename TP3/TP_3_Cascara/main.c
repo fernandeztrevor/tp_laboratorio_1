@@ -10,8 +10,8 @@ int main()
     int opcion = 0;
     EMovie movie[10];
     int index;
-
-    inicializar();
+    //printf("h");
+    inicializar(movie);
 
 
     while(seguir=='s')
@@ -26,6 +26,7 @@ int main()
         switch(opcion)
         {
             case 1:
+                agregarPelicula(movie);
                 break;
             case 2:
                 break;
