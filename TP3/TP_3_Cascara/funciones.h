@@ -1,7 +1,6 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
-
-#define cantidad 20
+//#define cantidad 20
 
 typedef struct{
     char titulo[20];
@@ -10,7 +9,7 @@ typedef struct{
     char descripcion[50];
     int puntaje;
     char linkImagen[50];
-    int estado;
+
 }EMovie;
 
 /**

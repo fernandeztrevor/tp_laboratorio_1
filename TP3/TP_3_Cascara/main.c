@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "funciones.h"
-
+#define cantidad 20
+#define valor 20
 
 
 int main()
 {
     char seguir = 's';
     int opcion = 0;
-    EMovie movie[10];
+    EMovie movie[cantidad];
     int index;
-    //printf("h");
-    inicializar(movie);
 
+    inicializar(movie);
 
     while(seguir=='s')
     {
