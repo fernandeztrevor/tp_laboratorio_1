@@ -19,10 +19,15 @@ int agregarPelicula(EMovie movie[])
     int salir = 0;
     int ok = 0;
 
-    i = buscaDisponible();
+    i = buscaDisponible(movie);
+
     do
     {
-        if(j == 0)
+        if(i == -1)
+        {
+           printf("\nNo hay mas espacio disponible\n");
+        }
+        else
         {
             printf("\nIngrese el titulo: \n");
             fflush(stdin);
@@ -134,11 +139,11 @@ int agregarPelicula(EMovie movie[])
             }
         break;
     case 9:
-        strcpy(movie[i].titulo, tituloAux);
-        strcpy(movie[i].genero, generoAux);
-        strcmp(movie[i].duracion, duracionAux);
-        strcpy(movie[i].descripcion, descripcionAux);
-        strcmp(movie[i].puntaje, puntajeAux);
+        strcpy(movie[i].titulo, tituloAux[i]);
+        strcpy(movie[i].genero, generoAux[i]);
+        movie[i].duracion = duracionAux;
+        strcpy(movie[i].descripcion, descripcionAux[i]);
+        movie[i].puntaje = puntajeAux;
         ok = guardar(movie, cantidad);
         if(ok == 0)
         {
@@ -181,7 +186,7 @@ int index;
 char confirm;
 int ok;
 
-i = listar(movie, cantidad);
+i = listar(movie);
 if(i == 0)
 {
     system("cls");
@@ -230,25 +235,26 @@ void inicializar(EMovie movie[])
 
     for(i=0; i<cantidad; i++)
     {
-        movie[i].duracion = -1;
+        movie[i].duracion = init;
     }
 }
+
+
 
 int buscaDisponible(EMovie movie[])
 {
     int index=-1;
     int i;
 
-
     for(i=0; i<cantidad; i++)
     {
-
-        if(movie[i].duracion == -1);
+        if(movie[i].duracion == init);
         {
+            printf("vas a guardar en la posicion %d\n", i);
+            printf("La duracion es %d\n", movie[i].duracion);
             return i;
         }
     }
-
     return index;
 }
 
@@ -261,12 +267,31 @@ int listar(EMovie movie[])
     {
         if(movie[i].duracion > 0)
         {
-            printf("%d.          %s\n", i, movie[i].titulo);
+            printf("%d.          %s         %d min\n", i, movie[i].titulo, movie[i].duracion);
             j++;
         }
     }
 
     return j;
+}
+
+void hardcode(EMovie movie[])
+{
+    char tituloAux[3][20]={"Rambo", "Rocky", "Tarzan"};
+    char generoAux[3][20]={"Accion", "Accion", "Aventura"};
+    int duracionAux[3]={120, 100, 40};
+    char descripcionAux[3][50]={"Rambo", "Rocky", "Tarzan"};
+    int puntajeAux[3]={2, 5, 4};
+    char linkImagenAux[3][50]={"Rambo", "Rocky", "Tarzan"};
+
+    for(int i=0; i<3; i++)
+    {
+        strcpy(movie[i].titulo, tituloAux[i]);
+        strcpy(movie[i].genero, generoAux[i]);
+        movie[i].duracion = duracionAux[i];
+        strcpy(movie[i].descripcion, descripcionAux[i]);
+        movie[i].puntaje = puntajeAux[i];
+    }
 }
 
 int numerico(int str)

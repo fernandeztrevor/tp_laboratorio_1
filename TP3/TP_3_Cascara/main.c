@@ -6,6 +6,7 @@
 #define valor 20
 
 
+
 int main()
 {
     char seguir = 's';
@@ -14,6 +15,8 @@ int main()
     int index;
 
     inicializar(movie);
+    hardcode(movie);
+    listar(movie);
 
     while(seguir=='s')
     {
@@ -35,6 +38,9 @@ int main()
                break;
             case 4:
                 seguir = 'n';
+                break;
+            case 8:
+                listar(movie);
                 break;
         }
     }
