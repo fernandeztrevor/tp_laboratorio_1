@@ -166,17 +166,49 @@ int guardar(EMovie movie[], int valor)
     FILE *pArch;
     int i = 0;
 
-        if((pArch=fopen("pelis.dat","wb"))==NULL)
-        {
-            printf("\nEl archivo no pudo ser abierto");
+    pArch = fopen("pelis.dat","wb");
+
+    if(pArch == NULL)
+    {
+        return i;
+        //printf("\nEl archivo no pudo ser abierto");
+    }
+    else{
+        fwrite(movie,sizeof(EMovie), valor, pArch);
+        i = 1;
+        fclose(pArch);
         }
-        else{
-            fwrite(movie,sizeof(EMovie), valor, pArch);
-            i = 1;
-            fclose(pArch);
-            }
 
     return i;
+}
+
+int cargar(EMovie movie[], int valor)
+{
+    FILE *pArch;
+    int i = 0;
+    int flag = 0;
+
+    pArch = fopen("pelis.dat","rb");
+    if(pArch == NULL)
+    {
+        pArch = fopen("pelis.dat","wb");
+        if(pArch == NULL)
+        {
+         return i;
+        //printf("\nEl archivo no pudo ser abierto");
+        }
+        flag=1;
+    }
+    if(flag==0)
+    {
+        while(feof(pArch) == 0 && i<cantidad)
+        {
+            fread(&movie[i], sizeof(EMovie), 1, pArch);
+            i++;
+        }
+    }
+    fclose(pArch);
+    return 0;
 }
 
 int borrarPelicula(EMovie movie[])
@@ -234,6 +266,13 @@ void generarPagina(EMovie movie[], char nombre[])
 
 }
 
+void imprimirEspecificaciones(EMovie movie[])
+{
+    FILE* pFile;
+
+    listar(movie);
+
+}
 
 void inicializar(EMovie movie[])
 {
@@ -244,8 +283,6 @@ void inicializar(EMovie movie[])
         movie[i].duracion = init;
     }
 }
-
-
 
 int buscaDisponible(EMovie movie[])
 {

@@ -22,6 +22,7 @@ int main()
         printf("2- Borrar pelicula\n");
         printf("3- Generar pagina web\n");
         printf("4- Salir\n");
+        printf("\n\n9- Cargar desde archivo\n");
 
         scanf("%d",&opcion);
 
@@ -38,8 +39,11 @@ int main()
             case 4:
                 seguir = 'n';
                 break;
-            case 8:
-                listar(movie);
+            case 5:
+                imprimirEspecificaciones(movie);
+                break;
+            case 9:
+                cargar(movie);
                 break;
         }
     }
