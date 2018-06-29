@@ -5,9 +5,9 @@
 #define cantidad 20
 #define init -1
 
-int agregarPelicula(EMovie movie[])
+int agregarPelicula(EMovie movie[], int i)
 {
-    int i;
+    //int i;
     int j = 0;
     int eleccion;
     char tituloAux[20];
@@ -19,7 +19,7 @@ int agregarPelicula(EMovie movie[])
     int salir = 0;
     int ok = 0;
 
-    i = buscaDisponible(movie);
+    //i = buscaDisponible(movie);
 
     do
     {
@@ -139,10 +139,10 @@ int agregarPelicula(EMovie movie[])
             }
         break;
     case 9:
-        strcpy(movie[i].titulo, tituloAux[i]);
-        strcpy(movie[i].genero, generoAux[i]);
+        strcpy(movie[i].titulo, tituloAux);
+        strcpy(movie[i].genero, generoAux);
         movie[i].duracion = duracionAux;
-        strcpy(movie[i].descripcion, descripcionAux[i]);
+        strcpy(movie[i].descripcion, descripcionAux);
         movie[i].puntaje = puntajeAux;
         ok = guardar(movie, cantidad);
         if(ok == 0)
@@ -183,10 +183,10 @@ int borrarPelicula(EMovie movie[])
 {
 int i;
 int index;
-char confirm;
+char confirm[1];
 int ok;
-
 i = listar(movie);
+
 if(i == 0)
 {
     system("cls");
@@ -202,11 +202,13 @@ else
     scanf("%d", &index);
     }
 
-    printf("\nEsta seguro que desea borrar %s?\nPresione S para confirmar\n", movie[index].titulo);
+    printf("\nEsta seguro que desea borrar %s?\nPresione S para confirmar, N para cancelar\n", movie[index].titulo);
     fflush(stdin);
     gets(confirm);
-    toupper(confirm);
-    if(confirm == 'S')
+    strupr(confirm);
+    printf("%s", confirm);
+
+    if( strcmp(confirm, "S")==0)
     {
         movie[index].duracion = -1;
         ok = guardar(movie, cantidad);
@@ -217,8 +219,12 @@ else
         else
             {
             system("cls");
-            printf("\n=========================BORRADO EXITOSO=========================\n");
+            printf("\n=========================BORRADO EXITOSO=========================\n\n");
             }
+    }
+    else
+    {
+        printf("No borraste nada");
     }
 }
 }
@@ -248,10 +254,8 @@ int buscaDisponible(EMovie movie[])
 
     for(i=0; i<cantidad; i++)
     {
-        if(movie[i].duracion == init);
+        if( movie[i].duracion == init )
         {
-            printf("vas a guardar en la posicion %d\n", i);
-            printf("La duracion es %d\n", movie[i].duracion);
             return i;
         }
     }

@@ -5,18 +5,16 @@
 #define cantidad 20
 #define valor 20
 
-
-
 int main()
 {
     char seguir = 's';
     int opcion = 0;
     EMovie movie[cantidad];
     int index;
+    int i;
 
     inicializar(movie);
     hardcode(movie);
-    listar(movie);
 
     while(seguir=='s')
     {
@@ -33,6 +31,7 @@ int main()
                 agregarPelicula(movie);
                 break;
             case 2:
+                borrarPelicula(movie);
                 break;
             case 3:
                break;
